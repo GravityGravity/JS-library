@@ -1,16 +1,18 @@
 // QUERIES
-
-const table_body = document.querySelector("tbody");
-const updateBtn = document.querySelector(".update");
+const table_body = document.querySelector("tbody"); // Table body that holds the book rows
+const updateBtn = document.querySelector(".update"); // Button that re-renders the table
 
 // GLOBALS
-const myLibrary = [];
+const myLibrary = []; // All Book objects
 
+// Book constructor (must be called with `new`)
 function Book(title, year, author, hasRead) {
+	// Throw if called without `new`
 	if (!new.target) {
 		throw Error("New not called for construct f Book()");
 	}
 
+	// Set the book's properties and generate a unique id
 	((this.title = title),
 		(this.year = year),
 		(this.author = author),
@@ -18,22 +20,28 @@ function Book(title, year, author, hasRead) {
 		(this.hasRead = hasRead));
 }
 
+// Create a Book and add it to the library
 function addBookToLib(title, year, author, hasRead) {
 	let book = new Book(title, year, author, hasRead);
 	myLibrary.push(book);
 }
 
+// Rebuild the table from myLibrary
 function renderLibrary() {
-	table_body.replaceChildren();
+	table_body.replaceChildren(); // Remove existing rows
+
 	for (let book of myLibrary) {
+		// New row, tagged with the book's id
 		let t_row = table_body.insertRow(-1);
 		t_row.classList.add(book.id);
 
+		// One cell per book property
 		for (let key in book) {
 			let cell = t_row.insertCell(-1);
 			cell.classList.add(key);
 
 			if (key === "hasRead") {
+				// Read status is shown as an image styled by CSS
 				let img = document.createElement("img");
 				if (book[key]) {
 					img.classList.add("book-read");
@@ -41,6 +49,7 @@ function renderLibrary() {
 
 				cell.appendChild(img);
 			} else {
+				// Every other property is shown as text
 				cell.textContent = book[key];
 			}
 		}
@@ -56,43 +65,46 @@ function renderLibrary() {
 	}
 }
 
+// Create a button that deletes the book from the array and the table
 function addDelBtn(book) {
 	const newBtn = document.createElement("button");
 	newBtn.type = "button";
 	newBtn.textContent = "Delete";
 	newBtn.addEventListener("click", (e) => {
-		const rmRow = table_body.querySelector(`.${book.id}`);
-		myLibrary.splice(myLibrary.indexOf(book), 1);
-		rmRow.remove();
+		const rmRow = table_body.querySelector(`.${book.id}`); // Find this book's row
+		myLibrary.splice(myLibrary.indexOf(book), 1); // Remove from the array
+		rmRow.remove(); // Remove from the DOM
 	});
 
 	return newBtn;
 }
 
+// Create a button that toggles the book's read status
 function addReadBtn(book) {
 	const newBtn = document.createElement("button");
 	newBtn.type = "button";
 	newBtn.textContent = "Toggle Read";
 	newBtn.addEventListener("click", (e) => {
-		const img = table_body.querySelector(`.${book.id} .hasRead img`);
-		book.hasRead = book.hasRead ? false : true;
-		img.classList.toggle("book-read");
+		const img = table_body.querySelector(`.${book.id} .hasRead img`); // This book's status image
+		book.hasRead = book.hasRead ? false : true; // Flip the stored value
+		img.classList.toggle("book-read"); // Update the display
 	});
 
 	return newBtn;
 }
-// EVENTS
 
+// EVENTS
+// Re-render the table when the update button is clicked
 updateBtn.addEventListener("click", () => {
 	renderLibrary();
 });
 
-//DEBUG
-
+// DEBUG
+// Sample data for testing
 addBookToLib("Book1", 1990, "Jane Doe 1", false);
 addBookToLib("Book1", 1990, "Jane Doe 1", true);
 addBookToLib("Book1", 1990, "Jane Doe 1", false);
 addBookToLib("Book1", 1990, "Jane Doe 1", false);
 addBookToLib("Book1", 1990, "Jane Doe 1", true);
 
-renderLibrary();
+renderLibrary(); // Initial render
