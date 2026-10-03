@@ -7,7 +7,7 @@ const updateBtn = document.querySelector('.update')
 // GLOBALS
 const myLibrary = [];
 
-function Book(title, year, author) {
+function Book(title, year, author, hasRead) {
     if(!new.target) {
         throw Error("New not called for construct f Book()")
     }
@@ -15,11 +15,12 @@ function Book(title, year, author) {
     this.title = title,
     this.year = year,
     this.author = author,
-    this.id = 'B-' + crypto.randomUUID()
+    this.id = 'B-' + crypto.randomUUID(),
+    this.hasRead = hasRead
 }
 
-function addBookToLib(title, year, author) {
-    let book = new Book(title, year, author);
+function addBookToLib(title, year, author, hasRead) {
+    let book = new Book(title, year, author, hasRead);
     myLibrary.push(book);
 }
 
@@ -31,14 +32,28 @@ function renderLibrary () {
 
         for (let key in book) {
             let cell = t_row.insertCell(-1);
-            cell.textContent = book[key];
+            cell.classList.add(key);
+
+            if (key === 'hasRead') {
+                let img = document.createElement('img');
+                console.log(book[key])
+                if (book[key]) {
+                    img.classList.add('book-read');
+                }
+
+                cell.appendChild(img);
+            } else {
+                cell.textContent = book[key];
+            }
         }
+
+        // Add buttons
         let cell = t_row.insertCell(-1);
         cell.appendChild(addDelBtn(book.id));
         cell = t_row.insertCell(-1);
-        cell.classList.add('read-state');
-        cell.appendChild(addReadBtn());
-        cell.appendChild(document.createElement('img'));
+        cell.appendChild(addReadBtn(book.id));
+
+        // Append Row
         table_body.appendChild(t_row);
     }
 }
@@ -55,12 +70,13 @@ function addDelBtn (id) {
     return newBtn;
 }
 
-function addReadBtn () {
+function addReadBtn (id) {
     const newBtn = document.createElement('button');
     newBtn.type = 'button';
-    newBtn.textContent = 'Read';
+    newBtn.textContent = 'Toggle Read';
     newBtn.addEventListener('click', e => {
-        e.currentTarget.nextElementSibling.classList.toggle('hasRead');
+        const img = table_body.querySelector(`.${id} .hasRead img`);
+        img.classList.toggle('book-read');
     });
 
     return newBtn;
@@ -73,8 +89,11 @@ updateBtn.addEventListener('click', () => {
 
 //DEBUG
 
-addBookToLib('Book1', 1990, 'Jane Doe 1');
-addBookToLib('Book1', 1990, 'Jane Doe 1');
-addBookToLib('Book1', 1990, 'Jane Doe 1');
-addBookToLib('Book1', 1990, 'Jane Doe 1');
-addBookToLib('Book1', 1990, 'Jane Doe 1');
+
+addBookToLib('Book1', 1990, 'Jane Doe 1', false);
+addBookToLib('Book1', 1990, 'Jane Doe 1', true);
+addBookToLib('Book1', 1990, 'Jane Doe 1', false);
+addBookToLib('Book1', 1990, 'Jane Doe 1', false);
+addBookToLib('Book1', 1990, 'Jane Doe 1', true);
+
+renderLibrary();

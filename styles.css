@@ -22,13 +22,13 @@ button {
     display: block;
 }
 
-.read-state {
+.hasRead {
     & img {
         background-color: rgb(236, 174, 174);
         content: url('./imgs/x.svg');
     }
 
-    & img.hasRead {
+    & img.book-read{
         background-color: greenyellow;
         content: url('./imgs/check.svg');
     }
