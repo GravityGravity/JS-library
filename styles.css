@@ -24,12 +24,12 @@ button {
 
 .read-state {
     & img {
-        background-color: red;
+        background-color: rgb(236, 174, 174);
         content: url('./imgs/x.svg');
     }
 
     & img.hasRead {
-        background-color: read;
+        background-color: greenyellow;
         content: url('./imgs/check.svg');
     }
 }
