@@ -59,9 +59,6 @@ function renderLibrary() {
 		cell.appendChild(addDelBtn(book));
 		cell = t_row.insertCell(-1);
 		cell.appendChild(addReadBtn(book));
-
-		// Append Row
-		table_body.appendChild(t_row);
 	}
 }
 
@@ -70,11 +67,10 @@ function addDelBtn(book) {
 	const newBtn = document.createElement("button");
 	newBtn.type = "button";
 	newBtn.textContent = "Delete";
-	newBtn.addEventListener("click", (e) => {
-		const rmRow = table_body.querySelector(`.${book.id}`); // Find this book's row
-		myLibrary.splice(myLibrary.indexOf(book), 1); // Remove from the array
-		rmRow.remove(); // Remove from the DOM
-	});
+    newBtn.addEventListener("click", (e) => {
+        myLibrary.splice(myLibrary.indexOf(book), 1);
+        e.currentTarget.closest("tr").remove();
+    });
 
 	return newBtn;
 }
@@ -84,7 +80,7 @@ function addReadBtn(book) {
 	const newBtn = document.createElement("button");
 	newBtn.type = "button";
 	newBtn.textContent = "Toggle Read";
-	newBtn.addEventListener("click", (e) => {
+	newBtn.addEventListener("click", () => {
 		const img = table_body.querySelector(`.${book.id} .hasRead img`); // This book's status image
 		book.hasRead = book.hasRead ? false : true; // Flip the stored value
 		img.classList.toggle("book-read"); // Update the display
@@ -95,9 +91,7 @@ function addReadBtn(book) {
 
 // EVENTS
 // Re-render the table when the update button is clicked
-updateBtn.addEventListener("click", () => {
-	renderLibrary();
-});
+updateBtn.addEventListener("click", renderLibrary);
 
 // DEBUG
 // Sample data for testing
