@@ -1,42 +1,41 @@
 kbd {
-  background-color: #eeeeee;
-  border-radius: 3px;
-  border: 1px solid #b4b4b4;
-  box-shadow:
-    0 1px 1px rgb(0 0 0 / 0.2),
-    0 2px 0 0 rgb(255 255 255 / 0.7) inset;
-  color: #333333;
-  display: inline-block;
-  font-size: 0.85em;
-  font-weight: bold;
-  line-height: 1;
-  padding: 2px 4px;
-  white-space: nowrap;
+	background-color: #eeeeee;
+	border-radius: 3px;
+	border: 1px solid #b4b4b4;
+	box-shadow:
+		0 1px 1px rgb(0 0 0 / 0.2),
+		0 2px 0 0 rgb(255 255 255 / 0.7) inset;
+	color: #333333;
+	display: inline-block;
+	font-size: 0.85em;
+	font-weight: bold;
+	line-height: 1;
+	padding: 2px 4px;
+	white-space: nowrap;
 }
 
 img {
-    display: inline;
+	display: inline;
 }
 
 button {
-    display: block;
+	display: block;
 }
 
 .hasRead {
-    & img {
-        background-color: rgb(236, 174, 174);
-        content: url('./imgs/x.svg');
-    }
+	& img {
+		background-color: rgb(236, 174, 174);
+		content: url("./imgs/x.svg");
+	}
 
-    & img.book-read{
-        background-color: greenyellow;
-        content: url('./imgs/check.svg');
-    }
+	& img.book-read {
+		background-color: greenyellow;
+		content: url("./imgs/check.svg");
+	}
 }
 
 table * {
-    outline: 1px solid black;
-    text-align: center;
-    padding: 5px;
+	outline: 1px solid black;
+	text-align: center;
+	padding: 5px;
 }
-
