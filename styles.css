@@ -13,3 +13,10 @@ kbd {
   padding: 2px 4px;
   white-space: nowrap;
 }
+
+table * {
+    outline: 1px solid black;
+    text-align: center;
+    padding: 5px;
+}
+

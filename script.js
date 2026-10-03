@@ -20,6 +20,8 @@ function showLibrary () {
     for(let book of myLibrary) {
         console.log(`${book.title} ${book.year} ${book.author} ${book.id}`);
     }
-
-    return null;
 }
+
+// QUERIES
+
+const table_body = document.querySelector('tbody');
