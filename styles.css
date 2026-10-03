@@ -24,7 +24,7 @@ button {
 
 .read-state {
     & img {
-        background-color: blue;
+        background-color: red;
         content: url('./imgs/x.svg');
     }
 

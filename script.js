@@ -35,6 +35,10 @@ function renderLibrary () {
         }
         let cell = t_row.insertCell(-1);
         cell.appendChild(addDelBtn(book.id));
+        cell = t_row.insertCell(-1);
+        cell.classList.add('read-state');
+        cell.appendChild(addReadBtn());
+        cell.appendChild(document.createElement('img'));
         table_body.appendChild(t_row);
     }
 }
@@ -51,15 +55,16 @@ function addDelBtn (id) {
     return newBtn;
 }
 
-function addReadBtn (id) {
+function addReadBtn () {
     const newBtn = document.createElement('button');
     newBtn.type = 'button';
     newBtn.textContent = 'Read';
     newBtn.addEventListener('click', e => {
-        e.currentTarget.classList.toggle(isRead)
-        rmRow.remove();
+        e.currentTarget.nextElementSibling.classList.toggle('hasRead');
     });
 
+    return newBtn;
+}
 // EVENTS
 
 updateBtn.addEventListener('click', () => {
