@@ -1,6 +1,9 @@
 // QUERIES
 const table_body = document.querySelector("tbody"); // Table body that holds the book rows
+const addBtn = document.querySelector(".add-book");
 const updateBtn = document.querySelector(".update"); // Button that re-renders the table
+const modalBox = document.querySelector('dialog');
+const modalSubmitBtn = modalBox.querySelector('button');
 
 // GLOBALS
 const myLibrary = []; // All Book objects
@@ -92,6 +95,15 @@ function addReadBtn(book) {
 // EVENTS
 // Re-render the table when the update button is clicked
 updateBtn.addEventListener("click", renderLibrary);
+
+modalSubmitBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+
+});
+
+addBtn.addEventListener('click', (e) => {
+    modalBox.showModal();
+});
 
 // DEBUG
 // Sample data for testing
