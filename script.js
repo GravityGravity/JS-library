@@ -2,9 +2,9 @@
 const table_body = document.querySelector("tbody"); // Table body that holds the book rows
 const addBtn = document.querySelector(".add-book");
 const updateBtn = document.querySelector(".update"); // Button that re-renders the table
-const modalBox = document.querySelector('dialog');
-const modalSubmitBtn = modalBox.querySelector('button');
-const form = modalBox.querySelector('form');
+const modalBox = document.querySelector("dialog");
+const modalSubmitBtn = modalBox.querySelector("button");
+const form = modalBox.querySelector("form");
 
 // GLOBALS
 const myLibrary = []; // All Book objects
@@ -71,10 +71,11 @@ function addDelBtn(book) {
 	const newBtn = document.createElement("button");
 	newBtn.type = "button";
 	newBtn.textContent = "Delete";
-    newBtn.addEventListener("click", (e) => {
-        myLibrary.splice(myLibrary.indexOf(book), 1);
-        e.currentTarget.closest("tr").remove();
-    });
+	newBtn.classList.add("delete-btn");
+	newBtn.addEventListener("click", (e) => {
+		myLibrary.splice(myLibrary.indexOf(book), 1);
+		e.currentTarget.closest("tr").remove();
+	});
 
 	return newBtn;
 }
@@ -98,7 +99,6 @@ function addReadBtn(book) {
 updateBtn.addEventListener("click", renderLibrary);
 
 form.addEventListener("submit", (e) => {
-
 	// Capture form data
 	console.dir(form.elements);
 	const data = Object.fromEntries(new FormData(form, modalSubmitBtn));
@@ -109,22 +109,20 @@ form.addEventListener("submit", (e) => {
 		data.title,
 		data.year,
 		data.author,
-		Object.hasOwn(data, 'readStatus') 
+		Object.hasOwn(data, "readStatus"),
 	);
 	renderLibrary();
 
-	console.log('Submit event');
-
+	console.log("Submit event");
 });
 
-modalBox.addEventListener('close', (e) => {
-	console.log('Close event');
+modalBox.addEventListener("close", (e) => {
+	console.log("Close event");
 	form.reset();
-
 });
 
-addBtn.addEventListener('click', (e) => {
-    modalBox.showModal();
+addBtn.addEventListener("click", (e) => {
+	modalBox.showModal();
 });
 
 // Sample data for testing
