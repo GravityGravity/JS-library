@@ -84,6 +84,7 @@ function addDelBtn(book) {
 function addReadBtn(book) {
 	const newBtn = document.createElement("button");
 	newBtn.type = "button";
+	newBtn.classList.add('toggle-read');
 	newBtn.textContent = "Toggle Read";
 	newBtn.addEventListener("click", () => {
 		const img = table_body.querySelector(`.${book.id} .hasRead img`); // This book's status image
