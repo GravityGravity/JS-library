@@ -24,3 +24,8 @@ A basic JavaScript library app to practice event handling, objects, forms, and d
 
 - Queries and creating new dom nodes take a hefty amount of js code.  Feel like there should be shorter syntax for doing most of these tasks or a different approach.
 - Learning form interactions within DOM webAPI
+
+### What did I learn
+- Improving commit messages with  ASD-STE100 Simplified Technical English standard
+- learning more webAPI methods!
+- JS objects interactions
