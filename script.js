@@ -4,6 +4,7 @@ const addBtn = document.querySelector(".add-book");
 const updateBtn = document.querySelector(".update"); // Button that re-renders the table
 const modalBox = document.querySelector('dialog');
 const modalSubmitBtn = modalBox.querySelector('button');
+const form = modalBox.querySelector('form');
 
 // GLOBALS
 const myLibrary = []; // All Book objects
@@ -96,8 +97,29 @@ function addReadBtn(book) {
 // Re-render the table when the update button is clicked
 updateBtn.addEventListener("click", renderLibrary);
 
-modalSubmitBtn.addEventListener("click", (e) => {
-    e.preventDefault();
+form.addEventListener("submit", (e) => {
+
+	// Capture form data
+	console.dir(form.elements);
+	const data = Object.fromEntries(new FormData(form, modalSubmitBtn));
+	console.log(data);
+
+	// Create new book with form data
+	addBookToLib(
+		data.title,
+		data.year,
+		data.author,
+		Object.hasOwn(data, 'readStatus') 
+	);
+	renderLibrary();
+
+	console.log('Submit event');
+
+});
+
+modalBox.addEventListener('close', (e) => {
+	console.log('Close event');
+	form.reset();
 
 });
 
@@ -105,12 +127,11 @@ addBtn.addEventListener('click', (e) => {
     modalBox.showModal();
 });
 
-// DEBUG
 // Sample data for testing
-addBookToLib("Book1", 1990, "Jane Doe 1", false);
-addBookToLib("Book1", 1990, "Jane Doe 1", true);
-addBookToLib("Book1", 1990, "Jane Doe 1", false);
-addBookToLib("Book1", 1990, "Jane Doe 1", false);
-addBookToLib("Book1", 1990, "Jane Doe 1", true);
+addBookToLib("Book1", 1990, "Jane Doe", false);
+addBookToLib("Book2", 1650, "John frow", true);
+addBookToLib("Book3", 1204, "Lane poe", false);
+addBookToLib("Book4", 1990, "Doe jane", false);
+addBookToLib("Book5", 1, "Wayne Mayne", true);
 
 renderLibrary(); // Initial render
