@@ -2,7 +2,7 @@
 
 A basic JavaScript library app to practice event handling, objects, forms, and dialog modals.
 
-![Screenshot of the Library app](screenshot.png)
+![Screenshot of the Library app](./imgs/screenshot.png)
 
 **Live site:** [View the Library app](https://YOUR-USERNAME.github.io/library/)
 
