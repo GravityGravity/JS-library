@@ -4,7 +4,7 @@ A basic JavaScript library app to practice event handling, objects, forms, and d
 
 ![Screenshot of the Library app](./imgs/screenshot.png)
 
-**Live site:** [View the Library app](https://YOUR-USERNAME.github.io/library/)
+**Live site:** [View the Library app]([https://gravitygravity.github.io/JS-library/])
 
 ## Functions
 
